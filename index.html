@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart CV & Resume Generator for Ethiopian Students</title>
+    <meta name="description" content="Create professional CVs and resumes instantly using AI. Designed specifically for Ethiopian university students and graduates." />
+    <style>
+      @media print {
+        @page {
+          size: A4;
+          margin: 0.5in;
+        }
+        
+        body {
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        
+        .print\\:hidden {
+          display: none !important;
+        }
+        
+        .print\\:p-0 {
+          padding: 0 !important;
+        }
+        
+        .print\\:p-4 {
+          padding: 1rem !important;
+        }
+        
+        .print\\:shadow-none {
+          box-shadow: none !important;
+        }
+        
+        .print\\:rounded-none {
+          border-radius: 0 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
