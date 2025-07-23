@@ -1,4 +1,43 @@
-export const generateContent = (userData) => {
+import { generateSummary } from './openRouterService';
+
+export const generateContent = async (userData, options = {}) => {
+  // Generate summary using new AI service with fallback
+  let summary = '';
+  
+  if (userData.autoGenerateSummary !== false) {
+    try {
+      const result = await generateSummary(userData, options);
+      summary = result.summary;
+    } catch (error) {
+      console.warn('Summary generation failed:', error);
+      // Fallback to original template-based generation
+      summary = userData.documentType === 'Resume' 
+        ? generateTailoredResumeSummary(userData)
+        : generateCVSummary(userData);
+    }
+  } else {
+    summary = userData.professionalSummary || '';
+  }
+
+  // For resumes, tailor content based on job description
+  if (userData.documentType === 'Resume') {
+    return generateTailoredResumeContent(userData, summary);
+  }
+
+  return {
+    summary,
+    skills: categorizeSkills(userData.skills || []),
+    workExperience: enhanceWorkExperience(userData.workExperience || []),
+    projects: userData.projects || [],
+    certifications: userData.certifications || [],
+    languages: userData.languages || [],
+    hobbies: userData.hobbies || [],
+    references: userData.references || []
+  };
+};
+
+// Legacy function for backward compatibility
+export const generateContentSync = (userData) => {
   const summary = userData.autoGenerateSummary !== false 
     ? (userData.documentType === 'Resume' 
         ? generateTailoredResumeSummary(userData)

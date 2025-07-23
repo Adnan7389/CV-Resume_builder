@@ -5,6 +5,7 @@ import {
   Github, Languages, Heart, GraduationCap, ArrowRight, ArrowLeft,
   CheckCircle, HelpCircle, AlertCircle, Save, Eye, Upload, X
 } from 'lucide-react';
+import AISummaryGenerator from './AISummaryGenerator';
 
 // Simple UUID generator for unique keys
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -30,50 +31,51 @@ const FormInput = ({
   formErrors,
   handleInputChange,
   showTooltip,
-  setShowTooltip,
-  ...rest 
-}) => (
-  <div className="relative">
-    <label className="block text-sm font-medium text-gray-700 mb-1">
-      {Icon && <Icon className="inline w-4 h-4 mr-2 text-gray-500" />}
-      {label} {required && <span className="text-red-500">*</span>}
-      {tooltipText && (
-        <button 
-          type="button"
-          className="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none"
-          onMouseEnter={() => setShowTooltip(name)}
-          onMouseLeave={() => setShowTooltip('')}
-          aria-label={`Help for ${label}`}
-        >
-          <HelpCircle className="w-3 h-3 inline" />
-        </button>
-      )}
-    </label>
+  setShowTooltip
+  // Remove ...rest entirely
+}) => {
+  return (
     <div className="relative">
-      <input
-        type={type}
-        name={name}
-        value={formData[name] || ''}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        className={`w-full px-3 py-2 border ${
-          formErrors[name] ? 'border-red-500 bg-red-50' : 'border-gray-300'
-        } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm shadow-sm`}
-        required={required}
-        {...rest}
-      />
-      {showTooltip === name && tooltipText && (
-        <Tooltip id={`tooltip-${name}`} text={tooltipText} />
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        {Icon && <Icon className="inline w-4 h-4 mr-2 text-gray-500" />}
+        {label} {required && <span className="text-red-500">*</span>}
+        {tooltipText && (
+          <button 
+            type="button"
+            className="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none"
+            onMouseEnter={() => setShowTooltip(name)}
+            onMouseLeave={() => setShowTooltip('')}
+            aria-label={`Help for ${label}`}
+          >
+            <HelpCircle className="w-3 h-3 inline" />
+          </button>
+        )}
+      </label>
+      <div className="relative">
+        <input
+          type={type}
+          name={name}
+          value={formData[name] || ''}
+          onChange={handleInputChange}
+          placeholder={placeholder}
+          required={required}
+          className={`w-full px-3 py-2 border ${
+            formErrors[name] ? 'border-red-500 bg-red-50' : 'border-gray-300'
+          } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm shadow-sm`}
+        />
+        {showTooltip === name && tooltipText && (
+          <Tooltip id={`tooltip-${name}`} text={tooltipText} />
+        )}
+      </div>
+      {formErrors[name] && (
+        <p className="mt-1 text-sm text-red-600 flex items-center">
+          <AlertCircle className="w-3 h-3 mr-1" />
+          {formErrors[name]}
+        </p>
       )}
     </div>
-    {formErrors[name] && (
-      <p className="mt-1 text-sm text-red-600 flex items-center">
-        <AlertCircle className="w-3 h-3 mr-1" />
-        {formErrors[name]}
-      </p>
-    )}
-  </div>
-);
+  );
+};
 
 // DynamicSection component - moved outside to prevent re-creation and focus loss
 const DynamicSection = React.memo(({ 

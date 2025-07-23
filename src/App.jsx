@@ -42,11 +42,27 @@ function App() {
     setCurrentState('form');
   };
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = async (data) => {
     setUserData(data);
-    const content = generateContent(data);
-    setGeneratedContent(content);
-    setCurrentState('preview');
+    try {
+      const content = await generateContent(data);
+      setGeneratedContent(content);
+      setCurrentState('preview');
+    } catch (error) {
+      console.error('Content generation failed:', error);
+      // Still show preview with basic content
+      setGeneratedContent({
+        summary: data.professionalSummary || '',
+        skills: data.skills || [],
+        workExperience: data.workExperience || [],
+        projects: data.projects || [],
+        certifications: data.certifications || [],
+        languages: data.languages || [],
+        hobbies: data.hobbies || [],
+        references: data.references || []
+      });
+      setCurrentState('preview');
+    }
   };
 
   const handleBackToForm = () => {
