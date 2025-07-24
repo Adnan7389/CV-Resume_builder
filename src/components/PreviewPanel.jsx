@@ -46,15 +46,18 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
         <div className="max-w-4xl mx-auto p-6 print:p-0">
           <div 
             ref={previewRef}
-            className="bg-white shadow-lg rounded-lg overflow-hidden print:shadow-none print:rounded-none print:p-6"
-            style={{ 
+            className="bg-white shadow-2xl mx-auto print:shadow-none print:mx-0"
+            style={{
               fontFamily: "'Inter', 'Roboto', 'Open Sans', sans-serif",
-              lineHeight: '1.5',
-              minHeight: '11in',
-              width: '8.5in',
+              lineHeight: '1.3',
+              height: '11.7in', // Fixed A4 height
+              width: '8.27in',   // Fixed A4 width
               margin: '0 auto',
-              fontSize: '11px',
-              color: '#1f2937'
+              fontSize: '10px',   // Reduced font size for more content
+              color: '#1f2937',
+              overflow: 'hidden', // Prevent content overflow
+              padding: '0.4in',   // Reduced padding
+              boxSizing: 'border-box'
             }}
           >
             {/* Header Section */}
@@ -268,11 +271,14 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
             className="bg-white shadow-lg rounded-lg overflow-hidden print:shadow-none print:rounded-none print:p-0"
             style={{ 
               fontFamily: 'Georgia, serif',
-              lineHeight: '1.2',
-              minHeight: '11.7in',
-              width: '10.5in',
+              lineHeight: '1',
+              minHeight: '11.5in',
+              width: '11.5in',
               margin: '0 auto',
-              fontSize: '10px'
+              fontSize: '9px',
+              overflow: 'hidden', // Prevent content overflow
+              padding: '0.0in',   // Reduced padding
+              boxSizing: 'border-box'
             }}
           >
             <div className="flex h-full">
@@ -338,22 +344,27 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
                   </div>
                 </div>
 
-                {/* Skills */}
-                {generatedContent.skills && generatedContent.skills.length > 0 && (
-                  <div className="mb-4">
-                    <h3 className="text-sm font-bold mb-2 border-b-2 border-white pb-1">
-                      Skills
-                    </h3>
-                    <div className="space-y-1">
-                      {generatedContent.skills.map((skill, index) => (
-                        <div key={index} className="flex items-start">
-                          <span className="text-white mr-2 text-xs">▶</span>
-                          <span className="text-xs leading-tight">{skill}</span>
-                        </div>
-                      ))}
+                {generatedContent.skills && (
+                    <div className="mb-4">
+                      <h3 className="text-sm font-bold mb-2 border-b-2 border-white pb-1">
+                        Skills
+                      </h3>
+                      <div className="space-y-1">
+                        {generatedContent.skills.technical && generatedContent.skills.technical.map((skill, index) => (
+                          <div key={index} className="flex items-start">
+                            <span className="text-white mr-2 text-xs">▶</span>
+                            <span className="text-xs leading-tight">{skill}</span>
+                          </div>
+                        ))}
+                        {generatedContent.skills.soft && generatedContent.skills.soft.map((skill, index) => (
+                          <div key={index} className="flex items-start">
+                            <span className="text-white mr-2 text-xs">▶</span>
+                            <span className="text-xs leading-tight">{skill}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                 {/* Languages */}
                 {generatedContent.languages && generatedContent.languages.length > 0 && (
@@ -444,7 +455,7 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
                 {generatedContent.projects && generatedContent.projects.length > 0 && (
                   <div className="mb-4">
                     <h3 className="text-base font-bold mb-2 text-blue-600 uppercase tracking-wide border-b border-blue-200 pb-1">
-                      Research Project
+                      Research/Final Year Project
                     </h3>
                     {generatedContent.projects.slice(0, 1).map((project, index) => (
                       <div key={index} className="mb-2">
@@ -564,19 +575,23 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
       <div className="max-w-4xl mx-auto p-6 print:p-0">
         <div 
           ref={previewRef}
-          className="bg-white shadow-lg rounded-lg print:shadow-none print:rounded-none p-8 print:p-6"
-          style={{ 
+          className="bg-white shadow-2xl mx-auto print:shadow-none print:mx-0"
+          style={{
             fontFamily: 'Arial, sans-serif',
-            lineHeight: '1.5',
-            minHeight: '11in',
-            width: '8.5in',
+            lineHeight: '1.2',
+            height: '11.7in', // Fixed A4 height
+            width: '10.27in',   // Fixed A4 width
             margin: '0 auto',
-            fontSize: '11px'
+            fontSize: '10px',   // Reduced font size for more content
+            color: '#1f2937',
+            // overflow: 'hidden', // Prevent content overflow
+            padding: '0.4in',   // Reduced padding
+            boxSizing: 'border-box'
           }}
         >
           {/* Header Section */}
           <div className="text-center mb-6 pb-4 border-b-2 border-gray-300">
-            <h1 className="text-2xl font-bold mb-2 text-gray-900 tracking-wide">
+            <h1 className="text-xl font-bold mb-2 text-gray-900 tracking-wide">
               {userData.fullName.toUpperCase()}
             </h1>
             {userData.targetJobTitle && (

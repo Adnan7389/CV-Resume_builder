@@ -26,7 +26,7 @@ const FormInput = ({
   required = false, 
   placeholder = '', 
   icon: Icon,
-  tooltipText,
+  tooltiptext,
   formData,
   formErrors,
   handleInputChange,
@@ -39,7 +39,7 @@ const FormInput = ({
       <label className="block text-sm font-medium text-gray-700 mb-1">
         {Icon && <Icon className="inline w-4 h-4 mr-2 text-gray-500" />}
         {label} {required && <span className="text-red-500">*</span>}
-        {tooltipText && (
+        {tooltiptext && (
           <button 
             type="button"
             className="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none"
@@ -63,8 +63,8 @@ const FormInput = ({
             formErrors[name] ? 'border-red-500 bg-red-50' : 'border-gray-300'
           } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm shadow-sm`}
         />
-        {showTooltip === name && tooltipText && (
-          <Tooltip id={`tooltip-${name}`} text={tooltipText} />
+        {showTooltip === name && tooltiptext && (
+          <Tooltip id={`tooltip-${name}`} text={tooltiptext} />
         )}
       </div>
       {formErrors[name] && (
