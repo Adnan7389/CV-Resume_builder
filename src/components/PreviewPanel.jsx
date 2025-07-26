@@ -239,7 +239,7 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
               fontFamily: 'Georgia, serif',
               lineHeight: '1.05',
               minHeight: '14.69in',
-              width: '10.9in',
+              width: '10.in',
               margin: '0 auto',
               fontSize: '9px',
               overflow: 'hidden'
@@ -401,10 +401,10 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
                 {generatedContent.projects?.length > 0 && (
                   <div className="mb-2">
                     <h3 className="text-xs font-bold mb-1 text-blue-600 uppercase border-b border-blue-200 pb-0.5">
-                      Research Project
+                     Research/ Final Year Project
                     </h3>
                     <ul className="space-y-2 text-xs text-gray-700">
-                      {generatedContent.projects.slice(0, 1).map((project, index) => (
+                      {generatedContent.projects.slice(0, 2).map((project, index) => (
                         <li key={index}>
                           <h4 className="font-semibold">{project.title}</h4>
                           <p>{project.description}</p>
@@ -446,7 +446,7 @@ const PreviewPanel = ({ userData, generatedContent, onBack }) => {
                 {generatedContent.certifications?.length > 0 && (
                   <div className="mb-2">
                     <h3 className="text-xs font-bold mb-1 text-blue-600 uppercase border-b border-blue-200 pb-0.5">
-                      Certifications
+                      Certifications & Trainings
                     </h3>
                     <ul className="text-xs space-y-0.5 ml-2">
                       {generatedContent.certifications.slice(0, 2).map((cert, index) => (
