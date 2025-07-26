@@ -3,6 +3,7 @@ import HomePage from './components/HomePage';
 import InputForm from './components/InputForm';
 import PreviewPanel from './components/PreviewPanel';
 import { generateContent } from './utils/aiGenerator';
+import './styles.css';
 
 const initialUserData = {
   fullName: '',

@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.resume-font {
+  font-family: 'Inter', 'Roboto', 'Open Sans', sans-serif;
+  line-height: 1.15;
+  font-size: 0.75rem; /* 9px */
+}
+
+.cv-font {
+  font-family: 'Georgia', serif;
+  line-height: 1.00;
+  font-size: 0.75rem; /* 9px */
+}
+
+.onepage-font {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.15;
+  font-size: 0.75rem; /* 9px */
+}
+
+.cv-sidebar {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+}
+
+/* Print-specific styles for A4 page */
+@media print {
+  @page {
+    size: A4;
+    margin: 0.0in; /* Reduced margin for more content space */
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .print-a4 {
+    width: 12.50in !important;
+    min-height: 11in !important; /* Allow multiple pages */
+    padding: 0.0in !important; /* Consistent padding for print */
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    break-inside: avoid; /* Prevent breaking within sections */
+  }
+  .print-a4 > * {
+    break-inside: avoid; /* Ensure sections stay intact */
+  }
+  .print-hidden {
+    display: none !important; /* Hide non-printable elements */
+  }
+}
